@@ -1,0 +1,19 @@
+# lnmp.yml 
+---
+- hosts: web
+   tasks:
+    - name: 'install gcc'
+      yum: name=gcc,pcre-devel,zlib-devel,php,php-gd,php-mysql,mariadb,mariadb-server state=latest
+    - name: 'nginx'
+      unarchive: src=/opt/nginx-1.21.1.tar.gz dest=/opt/
+    - name: 'intall nginx'
+      shell: cd /opt/nginx-1.21.1 && ./configure && make && make install
+    - name: 'start nginx'
+      shell: /usr/local/nginx/sbin/nginx
+    - name: 'start mariadb'
+      service: 'name=mariadb state=started'
+      
+
+
+
+
